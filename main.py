@@ -17,28 +17,27 @@ def calc_izoku_kiso_nenkin(num_children: int, has_spouse: bool) -> int:
         # 子がいないと遺族基礎年金は支給されない
         return 0
 
-    if not has_spouse:
-        # 子が受給する場合 → （基本額 + 第2子以降の加算）÷ 子の人数
-        add_amount = 0
-        if num_children >= 2:
-            add_amount += CHILD_ADD_FIRST_SECOND
-        if num_children >= 3:
-            add_amount += CHILD_ADD_THIRD_PLUS * (num_children - 2)
+    base_amount = BASE_AMOUNT
+    add_amount = 0
 
-        total = BASE_AMOUNT + add_amount
-        return total // num_children  # 子の人数で均等割
+    # 子が受給する場合 → （基本額 + 第2子以降の加算）÷ 子の人数
+    if not has_spouse:
+        if num_children <= 2:
+            add_amount = CHILD_ADD_FIRST_SECOND * num_children
+        if num_children >= 3:
+            add_amount = (CHILD_ADD_FIRST_SECOND * 2) + CHILD_ADD_THIRD_PLUS * (num_children - 2)
+
+        total = base_amount + add_amount
+        return total
 
     # 配偶者が受給する場合
-    amount = BASE_AMOUNT
-
-    if num_children >= 1:
-        amount += CHILD_ADD_FIRST_SECOND
-    if num_children >= 2:
-        amount += CHILD_ADD_FIRST_SECOND
+    if num_children <= 2:
+        add_amount = CHILD_ADD_FIRST_SECOND * num_children
     if num_children >= 3:
-        amount += CHILD_ADD_THIRD_PLUS * (num_children - 2)
+        add_amount = (CHILD_ADD_FIRST_SECOND * 2) + CHILD_ADD_THIRD_PLUS * (num_children - 2)
 
-    return amount
+    total = base_amount + add_amount
+    return total
 
 
 def main():
@@ -52,13 +51,21 @@ def main():
         print("入力エラー:", e)
         sys.exit(1)
 
-    amount = calc_izoku_kiso_nenkin(num_children, has_spouse)
+    # 受給額(年額)
+    total = calc_izoku_kiso_nenkin(num_children, has_spouse)
 
-    if amount == 0:
+    if total == 0:
         print("\n👉 子どもがいない場合は遺族基礎年金は支給されません。")
     else:
-        print(f"\n👉 年額の受給額は {amount:,} 円 です。")
+        # 受給額(月額)
+        total_month = int(total / 12)
+        print(f"\n👉 受給額は {total:,} (月額 {total_month:,}) 円です。")
+        if not has_spouse:
+            # 子ども一人当たり受給額
+            per_child = int(total / num_children)
+            per_child_month = int(per_child / 12)
 
+            print(f"\n👦 子ども一人当たり {per_child:,} (月額 {per_child_month:,}) 円です。")
 
 if __name__ == "__main__":
     main()
