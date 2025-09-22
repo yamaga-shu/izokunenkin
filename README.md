@@ -13,15 +13,18 @@
 
 ## 使い方
 
-1. ターミナルを開く
+1. ターミナルを開く:
+
 2.　このリポジトリをクローンする:
 ```
 $ git clone https://github.com/yamaga-shu/izokunenkin.git
 ```
+
 3. リポジトリのディレクトリに移動:
 ```
 $ cd ./izokunenkin
 ```
+
 4. スクリプトを実行:
 ```
 $ python3 main.py
