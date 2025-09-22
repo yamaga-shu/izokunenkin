@@ -1,7 +1,8 @@
-# 遺族基礎年金 受給額計算ツール
+# 遺族基礎年金 受給額計算ツール(2025)
 
 このリポジトリには、簡単なコマンドラインツール `izokunenkin/main.py` が含まれています。
-このツールは「遺族基礎年金」の受給額を簡易計算します。
+このツールは2025年時点での[遺族基礎年金](https://www.nenkin.go.jp/service/jukyu/seido/izokunenkin/jukyu-yoken/20150401-04.html)の受給額を簡易計算します。
+
 
 ---
 
@@ -10,6 +11,7 @@
 - gitのクローンができる
 - ターミナルの基本操作ができる
 - Python 3 が必要
+- [遺族基礎年金](https://www.nenkin.go.jp/service/jukyu/seido/izokunenkin/jukyu-yoken/20150401-04.html)について、基礎知識がある
 
 ## 使い方
 
