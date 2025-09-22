@@ -14,7 +14,6 @@
 ## 使い方
 
 1. ターミナルを開く:
-
 2.　このリポジトリをクローンする:
 ```
 $ git clone https://github.com/yamaga-shu/izokunenkin.git
